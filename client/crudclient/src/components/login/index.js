@@ -1,11 +1,52 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { constants } from '../../constants';
+import { succesLogin } from '../../api/actions';
 
 class Login extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+
+        this.doTheRequest();
+    }
+
+    doTheRequest() {
+        var details = {
+            'userName': 'ricardodeoliveirafranca@gmail.com',
+            'password': 'Ab-123',
+            'grant_type': 'password'
+        };
+
+        var formBody = [];
+        for (var property in details) {
+            var encodedKey = encodeURIComponent(property);
+            var encodedValue = encodeURIComponent(details[property]);
+            formBody.push(encodedKey + "=" + encodedValue);
+        }
+        formBody = formBody.join("&");
+
+        fetch(constants.urlToken, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: formBody
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error("It was not possible to reach the server, try again in a minute");
+            }
+
+            return response.json();
+        }).then(responseToken => {
+            this.props.successLogin(responseToken.userName, responseToken.access_token);
+            this.props.history.push('/');
+        })
+        .catch(error => {
+            console.log('err', error);
+        });
     }
 
     render() {
@@ -14,7 +55,6 @@ class Login extends Component {
             <div>
                 <div className="box-message">
                     {this.props.messages.errorMessage}
-                    
                 </div>
 
                 <form onSubmit={this.handleSubmit.bind(this)}>
@@ -42,4 +82,10 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(Login);
+const mapDispatchToProps = dispatch => {
+    return {
+        successLogin: (login, token) => dispatch(succesLogin(login, token))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

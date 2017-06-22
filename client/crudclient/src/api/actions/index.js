@@ -8,6 +8,10 @@ export function clearErrorMessage(message) {
     return { type: types.CLEAR_ERROR_MESSAGE, payload: message };
 }
 
+export function succesLogin(login, token) {
+    return { type: types.LOGIN_SUCCESS, payload: { login, token } };
+}
+
 // export function clearErrorMessage(message) {
 //     return { type: types.CLEAR_ERROR_MESSAGE, payload: message };
 // }

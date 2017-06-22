@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Home from './components/home';
+import Login from './components/login';
+import Register from './components/register';
+import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
+import { getReducers } from './api/reducers';
+
+const reducers = combineReducers(getReducers());
+const store = createStore(reducers);
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Provider store={store}>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+          </Switch>
+        </Router>
+      </Provider>
     );
   }
 }

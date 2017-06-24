@@ -13,7 +13,7 @@ const reducers = combineReducers(listOfReducers);
 const store = createStore(reducers);
 
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+export const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
     listOfReducers.auth(undefined, { type: 'IS_AUTHENTICATED' }) ? (
       <Component {...props} />
@@ -32,7 +32,8 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <Switch>
-            <PrivateRoute exact path="/" component={Home} />
+            {/*<PrivateRoute exact path="/" component={Home} />*/}
+            <SideMenu exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
           </Switch>

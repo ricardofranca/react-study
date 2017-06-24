@@ -1,9 +1,15 @@
 import { PrivateRoute } from '../../App';
+import { Link } from 'react-router-dom';
+import React from 'react';
 
-const SideMenu = ({ component: Component, exact, path }) => {
+export const SideMenu = ({ component: Component, exact, path }) => {
   return (
     <div>
-      <p>side menu</p>
+      <ul>
+        <li><Link to="/">Home</Link> </li>
+        <li><Link to="/logout">Logout</Link> </li>
+      </ul>
+
 
       <PrivateRoute exact path={path} component={Component} />
     </div>

@@ -7,6 +7,8 @@ import Register from './components/register';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { getReducers } from './api/reducers';
+import { SideMenu } from './components/menus/sideMenu';
+import Logout from './components/logout';
 
 const listOfReducers = getReducers();
 const reducers = combineReducers(listOfReducers);
@@ -36,6 +38,7 @@ class App extends Component {
             <SideMenu exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <Route path="/logout" component={Logout} />
           </Switch>
         </Router>
       </Provider>

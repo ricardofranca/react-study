@@ -7,3 +7,9 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const IS_AUTHENTICATED = 'IS_AUTHENTICATED';
 
 export const LOGOUT = 'LOGOUT';
+
+export const Client = {
+    fetchCall: 'CLIENT-FETCH-CALL',
+    fetchFailure: 'CLIENT-FETCH-FAILURE',
+    fetchSuccess: 'CLIENT-FETCH-SUCCESS'
+}

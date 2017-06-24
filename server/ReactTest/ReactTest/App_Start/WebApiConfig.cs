@@ -14,8 +14,8 @@ namespace ReactTest
         public static void Register(HttpConfiguration config)
         {
             //enabling cors (https://stackoverflow.com/questions/23293782/mvc-web-api-405-method-not-allowed)
-            var cors = new EnableCorsAttribute("*", "*", "*");
-            config.EnableCors(cors);
+            //var cors = new EnableCorsAttribute("*", "*", "*");
+            //config.EnableCors(cors);
 
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.

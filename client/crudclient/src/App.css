@@ -1,3 +1,7 @@
 .box-message {
     border: black, 1px, solid;
 }
+
+td {
+    border: 1px solid black;
+}

@@ -7,6 +7,7 @@ export const SideMenu = ({ component: Component, exact, path }) => {
     <div>
       <ul>
         <li><Link to="/">Home</Link> </li>
+        <li><Link to="/clients">Clients</Link> </li>
         <li><Link to="/logout">Logout</Link> </li>
       </ul>
 

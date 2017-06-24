@@ -16,6 +16,10 @@ export function logout(login, token) {
     return { type: types.LOGOUT };
 }
 
+export function fetchClient() {
+    return { type: types.Client.fetchCall };
+}
+
 // export function clearErrorMessage(message) {
 //     return { type: types.CLEAR_ERROR_MESSAGE, payload: message };
 // }

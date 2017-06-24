@@ -5,14 +5,21 @@ import Home from './components/home';
 import Login from './components/login';
 import Register from './components/register';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { getReducers } from './api/reducers';
 import { SideMenu } from './components/menus/sideMenu';
 import Logout from './components/logout';
+import ClientList from './components/clients/list';
+import createSagaMiddleware from 'redux-saga';
+import sagas from './api/sagas';
+
+const sagaMiddleware = createSagaMiddleware();
 
 const listOfReducers = getReducers();
 const reducers = combineReducers(listOfReducers);
-const store = createStore(reducers);
+const store = createStore(reducers, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(sagas);
 
 
 export const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -39,6 +46,7 @@ class App extends Component {
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/logout" component={Logout} />
+            <Route path="/clients" component={ClientList} />
           </Switch>
         </Router>
       </Provider>

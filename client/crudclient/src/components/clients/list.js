@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchClient } from '../../api/actions'
+import { Link } from 'react-router-dom';
 
 class ClientList extends Component {
     componentWillMount() {
@@ -8,8 +9,6 @@ class ClientList extends Component {
     }
 
     render() {
-
-
         const trs = this.props.clients.list.map(client => (
             <tr key={client.Id}>
                 <td>{client.Name}</td>
@@ -20,6 +19,9 @@ class ClientList extends Component {
         return (
             <div>
                 <h3>Clients List</h3>
+                <Link to="/clients/create">New Client</Link>
+                <br />
+                <br />
 
                 <table>
                     <thead>

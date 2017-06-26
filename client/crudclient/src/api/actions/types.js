@@ -11,5 +11,9 @@ export const LOGOUT = 'LOGOUT';
 export const Client = {
     fetchCall: 'CLIENT-FETCH-CALL',
     fetchFailure: 'CLIENT-FETCH-FAILURE',
-    fetchSuccess: 'CLIENT-FETCH-SUCCESS'
+    fetchSuccess: 'CLIENT-FETCH-SUCCESS',
+    updateForm: 'CLIENT-UPDATE-FORM',
+    saveNew: 'CLIENT-SAVE-NEW',
+    saveNewSuccess: 'CLIENT-SAVE-NEW-SUCCESS',
+    saveNewFailure: 'CLIENT-SAVE-NEW-FAILURE',
 }

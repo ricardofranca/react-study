@@ -5,3 +5,7 @@
 td {
     border: 1px solid black;
 }
+
+.error-message {
+    border: 1px solid red;
+}

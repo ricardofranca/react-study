@@ -20,6 +20,15 @@ export function fetchClient() {
     return { type: types.Client.fetchCall };
 }
 
+export function updateClientForm(field, fieldValue) {
+    return { type: types.Client.updateForm, payload: { field, fieldValue } };
+}
+
+export function saveClient(name, dateOfBirth) {
+    return { type: types.Client.saveNew, payload: { name, dateOfBirth } };
+}
+
+
 // export function clearErrorMessage(message) {
 //     return { type: types.CLEAR_ERROR_MESSAGE, payload: message };
 // }

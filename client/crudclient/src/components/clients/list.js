@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchClient } from '../../api/actions'
+import { fetchClient, saveClient, removeClient } from '../../api/actions'
 import { Link } from 'react-router-dom';
 
 class ClientList extends Component {
@@ -8,11 +8,19 @@ class ClientList extends Component {
         this.props.retriveClients();
     }
 
+    handleRemove(clientId) {
+        const response = window.confirm('Are you sure you want to remove this Client?');
+        if (response === true) {
+            this.props.remove(clientId);
+        }
+    }
+
     render() {
         const trs = this.props.clients.list.map(client => (
             <tr key={client.Id}>
                 <td>{client.Name}</td>
                 <td>{client.DateOfBirth}</td>
+                <td><button onClick={() => this.handleRemove(client.Id)} >remove</button></td>
             </tr>
         ))
 
@@ -28,6 +36,7 @@ class ClientList extends Component {
                         <tr>
                             <td>Name</td>
                             <td>Birth</td>
+                            <td></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,7 +57,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        retriveClients: () => dispatch(fetchClient())
+        retriveClients: () => dispatch(fetchClient()),
+        remove: id => dispatch(removeClient(id)),
     };
 }
 

@@ -16,4 +16,7 @@ export const Client = {
     saveNew: 'CLIENT-SAVE-NEW',
     saveNewSuccess: 'CLIENT-SAVE-NEW-SUCCESS',
     saveNewFailure: 'CLIENT-SAVE-NEW-FAILURE',
+    removeClient: 'CLIENT-REMOVE',
+    removeClientSuccess: 'CLIENT-REMOVE-SUCCESS',
+    removeClientFailure: 'CLIENT-REMOVE-REMOVE',
 }

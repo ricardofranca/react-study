@@ -13,12 +13,25 @@ function fetchClientAjax({ token }) {
 }
 
 function saveNewAjax({ payload, token }) {
-    console.log('save');
+    const headers = getHeadersWithToken(token);
+
+    const body = {
+        "Name": payload.name,
+        "DateOfBirth": payload.dateOfBirth
+    };
+
+    return fetch(`${constants.urlBase}/Clients`, { method: 'POST', headers, body: JSON.stringify(body) })
+        .then(response => response.json());
+}
+
+function removeAjax({ clientId, token }) {
+    const headers = getHeadersWithToken(token);
+
+    return fetch(`${constants.urlBase}/Clients/${clientId}`, { method: 'DELETE', headers })
+        .then(response => response.json());
 }
 
 function* fetchClient(action) {
-    const { payload } = action;
-
     try {
         const { auth } = yield select();
         const token = auth.token;
@@ -26,7 +39,7 @@ function* fetchClient(action) {
         yield put({ type: ClientTypes.fetchSuccess, payload });
     } catch (err) {
         console.error('saga error', err.message);
-        yield put({ type: ClientTypes.fetchFailure, payload });
+        yield put({ type: ClientTypes.fetchFailure });
     }
 }
 
@@ -54,9 +67,24 @@ function* saveNew(action) {
     }
 }
 
-// function* remove(action) {
+function* removeClient(action) {
+    const { payload } = action;
 
-// }
+    try {
+        const { auth } = yield select();
+        const token = auth.token;
+
+        console.log('calling: ', payload.clientId);
+        yield call(removeAjax, { clientId: payload.clientId, token });
+
+        yield call(fetchClient, { payload });
+
+        yield put({ type: ClientTypes.removeClientSuccess });
+    } catch (err) {
+        yield put({ type: ClientTypes.removeClientFailure });
+    }
+
+}
 
 // function* edit(action) {
 
@@ -68,4 +96,8 @@ export function* watchFetchClients() {
 
 export function* watchSaveNewClient() {
     yield takeLatest(ClientTypes.saveNew, saveNew);
+}
+
+export function* watchremoveClient() {
+    yield takeLatest(ClientTypes.removeClient, removeClient);
 }

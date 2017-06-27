@@ -28,6 +28,9 @@ export function saveClient(name, dateOfBirth) {
     return { type: types.Client.saveNew, payload: { name, dateOfBirth } };
 }
 
+export function removeClient(clientId) {
+    return { type: types.Client.removeClient, payload: { clientId } };
+}
 
 // export function clearErrorMessage(message) {
 //     return { type: types.CLEAR_ERROR_MESSAGE, payload: message };

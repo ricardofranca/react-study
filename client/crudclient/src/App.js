@@ -1,26 +1,19 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
+import { routerReducer, routerMiddleware, ConnectedRouter } from 'react-router-redux'
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import createHistory from 'history/createBrowserHistory';
 
 import './App.css';
-import { getReducers } from './api/reducers';
+import { reducers } from './api/reducers';
 import sagas from './api/sagas';
 import MainRouter from './infra/Router';
 
-const sagaMiddleware = createSagaMiddleware();
-
-const listOfReducers = getReducers();
-const reducers = combineReducers(listOfReducers);
-const store = createStore(reducers, applyMiddleware(sagaMiddleware));
-
-sagaMiddleware.run(sagas);
-
-
 export const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
-    listOfReducers.auth(undefined, { type: 'IS_AUTHENTICATED' }) ? (
+    reducers.auth(undefined, { type: 'IS_AUTHENTICATED' }) ? (
       <Component {...props} />
     ) : (
         <Redirect to={{
@@ -32,11 +25,29 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
 )
 
 class App extends Component {
+  componentWillMount() {
+    const sagaMiddleware = createSagaMiddleware();
+    this.history = createHistory();
+    const routerReduxMiddleware = routerMiddleware(this.history);
+    const middlewares = [
+      routerReduxMiddleware,
+      sagaMiddleware,
+    ];
+
+    const combReducers = combineReducers({ ...reducers, router: routerReducer });
+    this.store = createStore(combReducers, applyMiddleware(...middlewares));
+
+    sagaMiddleware.run(sagas);
+  }
+
   render() {
     return (
-      <Provider store={store}>
-        <MainRouter />
+      <Provider store={this.store}>
+        <ConnectedRouter history={this.history}>
+          <MainRouter />
+        </ConnectedRouter>
       </Provider>
+
     );
   }
 }

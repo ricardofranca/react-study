@@ -5,6 +5,7 @@ import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import { updateClientForm, saveClient } from '../../api/actions';
 import { Link } from 'react-router-dom';
+import {push } from 'react-router-redux';
 
 class ClientCreate extends Component {
 
@@ -28,7 +29,6 @@ class ClientCreate extends Component {
     }
 
     render() {
-        console.log('edit2: ', this.props.clients.edit);
         return (
             <div>
                 <h3>New List</h3>

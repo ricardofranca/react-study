@@ -58,7 +58,7 @@ function* saveNew(action) {
 
         console.log('saved, redirecting');
 
-        yield put(push('/'));
+        yield put(push('/clients'));
 
         console.log('end saga');
     } catch (err) {

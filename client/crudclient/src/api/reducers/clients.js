@@ -19,7 +19,6 @@ export function clientsReducer(state = initialState, action) {
             return { ...state, errorMessage: action.payload };
         case Client.updateForm:
             let { edit } = state;
-            console.log('edit: ', action.payload);
             edit[action.payload.field] = action.payload.fieldValue;
             return { ...state, edit };
         case Client.saveNewSuccess:

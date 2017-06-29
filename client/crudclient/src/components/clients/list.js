@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchClient, saveClient, removeClient } from '../../api/actions'
+import { fetchClient, removeClient } from '../../api/actions'
 import { Link } from 'react-router-dom';
 
 class ClientList extends Component {

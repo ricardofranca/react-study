@@ -3,6 +3,7 @@ import { Client } from '../actions/types';
 const initialState = {
     list: [],
     edit: {
+        id: '',
         name: '',
         dateOfBirth: ''
     },

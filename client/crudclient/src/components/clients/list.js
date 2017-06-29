@@ -20,6 +20,7 @@ class ClientList extends Component {
             <tr key={client.Id}>
                 <td>{client.Name}</td>
                 <td>{client.DateOfBirth}</td>
+                <td><Link to={`/clients/edit/${client.Id}`}>Edit</Link></td>
                 <td><button onClick={() => this.handleRemove(client.Id)} >remove</button></td>
             </tr>
         ))
@@ -36,14 +37,13 @@ class ClientList extends Component {
                         <tr>
                             <td>Name</td>
                             <td>Birth</td>
-                            <td></td>
+                            <td colSpan="2"></td>
                         </tr>
                     </thead>
                     <tbody>
                         {trs}
                     </tbody>
                 </table>
-
             </div>
         );
     }

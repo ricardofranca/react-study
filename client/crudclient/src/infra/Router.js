@@ -8,6 +8,7 @@ import ClientCreate from '../components/clients/create';
 import { SideMenu } from '../components/menus/sideMenu';
 import Logout from '../components/logout';
 import ClientList from '../components/clients/list';
+import EditList from '../components/clients/edit';
 
 const MainRouter = function () {
     return (
@@ -18,6 +19,7 @@ const MainRouter = function () {
             <SideMenu exact path="/" component={Home} />
             <SideMenu path="/clients" component={ClientList} exact />
             <SideMenu path="/clients/create" component={ClientCreate} />
+            <SideMenu path="/clients/edit/:id" component={EditList} />
         </Switch>
     );
 }

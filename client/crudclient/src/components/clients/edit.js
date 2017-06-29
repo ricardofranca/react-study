@@ -1,28 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getClient, updateClient, updateClientForm } from '../../api/actions';
 import DatePicker from 'react-datepicker';
-import moment from 'moment';
-import 'react-datepicker/dist/react-datepicker.css';
-import { updateClientForm, saveClient } from '../../api/actions';
 import { Link } from 'react-router-dom';
 
-class ClientCreate extends Component {
-
-    constructor(props) {
-        super(props);
-        this.props.updateForm('name', '');
-        this.props.updateForm('dateOfBirth', moment());
+class EditClient extends Component {
+    componentWillMount() {
+        const { id } = this.props.match.params;
+        this.props.getClient(id);
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.save(this.props.clients.edit.name, this.props.clients.edit.dateOfBirth.format());
+        this.props.updateClient(this.props.clients.edit.id, this.props.clients.edit.name, this.props.clients.edit.dateOfBirth.format());
     }
 
     render() {
         return (
             <div>
-                <h3>New Client</h3>
+                <h3>Edit Client</h3>
 
                 <div className="error-message">
                     {this.props.messages.errorMessage}
@@ -49,16 +45,17 @@ class ClientCreate extends Component {
 
 const mapStateToProps = state => {
     return {
+        clients: state.clients,
         messages: state.messages,
-        clients: state.clients
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
+        getClient: (clientId) => dispatch(getClient(clientId)),
+        updateClient: (id, name, dateOfBirth) => dispatch(updateClient(id, name, dateOfBirth)),
         updateForm: (field, fieldValue) => dispatch(updateClientForm(field, fieldValue)),
-        save: (name, dateOfBirth) => dispatch(saveClient(name, dateOfBirth))
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ClientCreate);
+export default connect(mapStateToProps, mapDispatchToProps)(EditClient);

@@ -32,6 +32,10 @@ export function removeClient(clientId) {
     return { type: types.Client.removeClient, payload: { clientId } };
 }
 
-// export function clearErrorMessage(message) {
-//     return { type: types.CLEAR_ERROR_MESSAGE, payload: message };
-// }
+export function getClient(clientId) {
+    return { type: types.Client.getClient, payload: { clientId } };
+}
+
+export function updateClient(clientId, name, dateOfBirth) {
+    return { type: types.Client.update, payload: { clientId, name, dateOfBirth } };
+}

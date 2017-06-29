@@ -18,5 +18,11 @@ export const Client = {
     saveNewFailure: 'CLIENT-SAVE-NEW-FAILURE',
     removeClient: 'CLIENT-REMOVE',
     removeClientSuccess: 'CLIENT-REMOVE-SUCCESS',
-    removeClientFailure: 'CLIENT-REMOVE-REMOVE',
+    removeClientFailure: 'CLIENT-REMOVE-FAILURE',
+    getClient: 'CLIENT-GET',
+    getClientSuccess: 'CLIENT-GET-SUCCESS',
+    getClientFailure: 'CLIENT-GET-FAILURE',
+    update: 'CLIENT-UPDATE',
+    updateSuccess: 'CLIENT-UPDATE-SUCCESS',
+    updateFailure: 'CLIENT-UPDATE-FAILURE',
 }
